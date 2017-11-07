@@ -32,7 +32,7 @@ http.listen(3000, function () {
     console.log('listening on port 3000');
 
     setInterval(function () {
-        if (!busy) {
+        if (!busy && numClients>0) {
             busy = true;
             campi.getImageAsStream({
                 width: 640,
