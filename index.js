@@ -4,11 +4,28 @@ var Campi = require('campi'),
     io = require('socket.io')(http),
     base64 = require('base64-stream');
 
+var numClients = 0;
+    
 var campi = new Campi();
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
+
+io.on('connection', function(socket) {
+    numClients++;
+    io.emit('stats', { numClients: numClients });
+
+    console.log('Connected clients:', numClients);
+
+    socket.on('disconnect', function() {
+        numClients--;
+        io.emit('stats', { numClients: numClients });
+
+        console.log('Connected clients:', numClients);
+    });
+});
+
 
 http.listen(3000, function () {
     var busy = false;
