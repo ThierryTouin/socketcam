@@ -23,12 +23,19 @@ $ cd socketcam
 $ npm install
 ```
 
-## Running
+## Running in Development
 In the **socketcam** directory, type:
 
 ```bash
 $ npm start
 ```
+## Running in Production
+In the **socketcam** directory, type:
+
+```bash
+$ forever start index.js
+```
+
 
 Then, point your browser to:
 ```
