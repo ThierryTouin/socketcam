@@ -4,6 +4,9 @@ var Campi = require('campi'),
     io = require('socket.io')(http),
     base64 = require('base64-stream');
 
+const errorLog = require('./util/logger').errorlog;
+const successlog = require('./util/logger').successlog;
+
 var numClients = 0;
     
 var campi = new Campi();
@@ -16,13 +19,15 @@ io.on('connection', function(socket) {
     numClients++;
     io.emit('stats', { numClients: numClients });
 
-    console.log('Connected clients:', numClients);
+    successlog.info(`Connected clients: ${numClients}`);
+    //console.log('Connected clients:', numClients);
 
     socket.on('disconnect', function() {
         numClients--;
         io.emit('stats', { numClients: numClients });
 
-        console.log('Connected clients:', numClients);
+        successlog.info(`Connected clients: ${numClients}`);
+        //console.log('Connected clients:', numClients);
     });
 });
 
