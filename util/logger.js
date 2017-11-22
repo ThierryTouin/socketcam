@@ -1,8 +1,6 @@
  /**
  * Configurations of logger.
  */
-var fs = require('fs');
-
 const winston = require('winston');
 const winstonRotator = require('winston-daily-rotate-file');
 
@@ -16,7 +14,8 @@ const createLogger = new winston.Logger({
   'transports': consoleConfig
 });
 
-var dir = __dirname + '/logs';
+var fs = require('fs');
+var dir = './logs';
 if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, 0744);
 }
@@ -25,7 +24,7 @@ const successLogger = createLogger;
 successLogger.add(winstonRotator, {
   'name': 'access-file',
   'level': 'info',
-  'filename': __dirname + '/logs/access.log',
+  'filename': './logs/access.log',
   'json': false,
   'datePattern': 'yyyy-MM-dd-',
   'prepend': true
@@ -35,7 +34,7 @@ const errorLogger = createLogger;
 errorLogger.add(winstonRotator, {
   'name': 'error-file',
   'level': 'error',
-  'filename': __dirname + '/logs/error.log',
+  'filename': './logs/error.log',
   'json': false,
   'datePattern': 'yyyy-MM-dd-',
   'prepend': true
