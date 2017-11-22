@@ -1,6 +1,8 @@
  /**
  * Configurations of logger.
  */
+var fs = require('fs');
+
 const winston = require('winston');
 const winstonRotator = require('winston-daily-rotate-file');
 
@@ -15,7 +17,7 @@ const createLogger = new winston.Logger({
 });
 
 var dir = __dirname + '/logs';
-if (!path.existsSync(dir)) {
+if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, 0744);
 }
 
