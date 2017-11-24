@@ -20,6 +20,10 @@
         }
     </style>
     <script type="text/javascript">
+
+        //send to the server with person name and message
+        socket.emit("clientMsg", navigator.userAgent );
+
         document.onreadystatechange = function () {
             var state = document.readyState
             if (state == 'complete') {

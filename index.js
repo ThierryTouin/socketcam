@@ -16,6 +16,11 @@ app.get('/', function (req, res) {
 });
 
 io.on('connection', function(socket) {
+
+    socket.on("clientMsg", function (data) {
+        successlog.info(`Client user agent : ${data}`);
+    });
+
     numClients++;
     io.emit('stats', { numClients: numClients });
 
